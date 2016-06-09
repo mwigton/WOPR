@@ -11,6 +11,9 @@ void SetupUtils()
 	srand(time(&t));
 }
 
+// Writes out msg in a type writer effect with a 
+// beeping sound to the standard output.
+// Does not beep on spaces
 void TypeMsg(const char *msg)
 {
 	int i = 0;
@@ -29,6 +32,7 @@ void TypeMsg(const char *msg)
 	}
 }
 
+// Same as TypeMsg, but beeps on spaces
 void TypeWithSpaceSound(const char* msg)
 {
 	int i = 0;
@@ -43,6 +47,8 @@ void TypeWithSpaceSound(const char* msg)
 	}
 }
 
+// types msg centered on the screen, 
+// hard coded macro for width of IBM screen
 void TypeCenter(const char *msg)
 {
 	int msgLength = strLength(msg);
@@ -51,6 +57,7 @@ void TypeCenter(const char *msg)
 	TypeMsg(msg);
 }
 
+// Same as TypeMsg, but with no delay between letters
 void TypeMsgFast(const char* msg)
 {
 	int i = 0;
@@ -69,18 +76,12 @@ void Print(const char *msg)
 	printf("%s", msg);
 }
 
-void FlushStdIn()
-{
-	//char ch;
-	//while((ch = getchar()) != '\n' && ch != EOF);
-}
-
 void Delay(int milliseconds)
 {
 	//On the IBM, I could not find a delay lib function that works,
 	//but this works correctly
 	clock_t start = clock();
-	while((clock() - start) * 1000/ 3000 < milliseconds){}
+	while((clock() - start) * 1000 / 3000 < milliseconds){}
 }
 
 void Newline()
@@ -102,7 +103,7 @@ int strLength(const char *msg)
 {
 	int i = 0;
 	while(msg[i] != 0)
-       	{
+    {
 		i++;
 	}
 

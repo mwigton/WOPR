@@ -10,7 +10,6 @@ void TypeWithSpaceSound(const char* msg);
 void TypeCenter(const char* msg);
 void TypeMsgFast(const char* msg);
 void Print(const char* msg);
-void FlushStdIn();
 
 void Delay(int milliseconds);
 void Newline();
