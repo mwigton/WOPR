@@ -11,6 +11,27 @@ void SetupUtils()
 	srand(time(&t));
 }
 
+void playTone(int hrtz)
+{
+#ifdef _MSC_VER
+	Beep(hrtz + 2500, 30);
+#else
+	sound(hrtz);
+	delay(5);
+	nosound();
+#endif
+}
+
+void playToneShort(int hrtz)
+{
+#ifdef _MSC_VER
+	Beep(hrtz + 2500, 5);
+#else
+	sound(hrtz);
+	nosound();
+#endif
+}
+
 // Writes out msg in a type writer effect with a 
 // beeping sound to the standard output.
 // Does not beep on spaces
@@ -21,13 +42,11 @@ void TypeMsg(const char *msg)
 	{
 		if(msg[i] != ' ')
 		{
-			sound(RandRange(1000, 1100));
+			playTone(RandRange(1000, 1100));
 		}
 		
 		fflush(stdout);
 		printf("%c", msg[i]);
-		delay(5);
-		nosound();
 		i++;
 	}
 }
@@ -39,10 +58,8 @@ void TypeWithSpaceSound(const char* msg)
 	while(msg[i])
 	{
 		fflush(stdout);
-		sound(RandRange(1000, 1100));
+		playTone(RandRange(1000, 1100));
 		printf("%c", msg[i]);
-		delay(5);
-		nosound();
 		i++;
 	}
 }
@@ -64,9 +81,8 @@ void TypeMsgFast(const char* msg)
 	while(msg[i])
 	{
 		fflush(stdout);
-		sound(RandRange(1000, 1100));
+		playToneShort(RandRange(1000, 1100));
 		printf("%c", msg[i]);
-		nosound();
 		i++;
 	}
 }
@@ -74,14 +90,6 @@ void TypeMsgFast(const char* msg)
 void Print(const char *msg)
 {
 	printf("%s", msg);
-}
-
-void Delay(int milliseconds)
-{
-	//On the IBM, I could not find a delay lib function that works,
-	//but this works correctly
-	clock_t start = clock();
-	while((clock() - start) * 1000 / 3000 < milliseconds){}
 }
 
 void Newline()

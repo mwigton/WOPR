@@ -25,7 +25,7 @@ MCommand
 6
 MItem
 8
-WOPR.exe
+wopr.exe
 7
 WString
 3
@@ -63,8 +63,8 @@ WVList
 0
 15
 MItem
-6
-main.c
+16
+..\..\src\main.c
 16
 WString
 4
@@ -81,8 +81,8 @@ WVList
 0
 19
 MItem
-6
-util.c
+16
+..\..\src\util.c
 20
 WString
 4
@@ -99,8 +99,8 @@ WVList
 0
 23
 MItem
-6
-wopr.c
+16
+..\..\src\wopr.c
 24
 WString
 4
@@ -135,8 +135,8 @@ WVList
 0
 31
 MItem
-6
-util.h
+16
+..\..\src\util.h
 32
 WString
 3
@@ -153,8 +153,8 @@ WVList
 0
 35
 MItem
-6
-wopr.h
+16
+..\..\src\wopr.h
 36
 WString
 3

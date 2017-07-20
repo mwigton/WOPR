@@ -3,7 +3,15 @@
 
 #define CONSOLE_WIDTH 80
 
+#ifdef _MSC_VER
+#include <Windows.h>
+#define delay(millsec) Sleep(millsec)
+#endif
+
 void SetupUtils();
+
+void playTone(int hrtz);
+void wait(int millsec);
 
 void TypeMsg(const char* msg);
 void TypeWithSpaceSound(const char* msg);
@@ -11,7 +19,6 @@ void TypeCenter(const char* msg);
 void TypeMsgFast(const char* msg);
 void Print(const char* msg);
 
-void Delay(int milliseconds);
 void Newline();
 int RandRange(int min, int max);
 void ClearScreen();
