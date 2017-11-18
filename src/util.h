@@ -1,7 +1,8 @@
-#ifndef util_h
-#define util_h
+#ifndef UTIL_H
+#define UTIL_H
 
 #define CONSOLE_WIDTH 80
+#define ARRAY_SIZE(x) (sizeof((x)) / sizeof((x)[0]))
 
 #ifdef _MSC_VER
 #include <Windows.h>
@@ -13,15 +14,15 @@ void SetupUtils();
 void playTone(int hrtz);
 void wait(int millsec);
 
-void TypeMsg(const char* msg);
-void TypeWithSpaceSound(const char* msg);
-void TypeCenter(const char* msg);
-void TypeMsgFast(const char* msg);
-void Print(const char* msg);
+void typeMsg(const char* msg);
+void typeWithSpaceSound(const char* msg);
+void typeCenter(const char* msg);
+void typeMsgFast(const char* msg);
+void print(const char* msg);
+void printLine(const char* msg);
 
-void Newline();
-int RandRange(int min, int max);
-void ClearScreen();
-int strLength(const char *str);
-void GetLine(char *msg, int length);
+void newline();
+int randRange(int min, int max);
+void clearScreen();
+void getLine(char *msg, int length);
 #endif

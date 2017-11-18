@@ -8,13 +8,13 @@
 void SetupUtils()
 {
 	time_t t;
-	srand(time(&t));
+	srand((unsigned int)time(&t));
 }
 
 void playTone(int hrtz)
 {
 #ifdef _MSC_VER
-	Beep(hrtz + 2500, 30);
+	Beep(hrtz + 2500, 50);
 #else
 	sound(hrtz);
 	delay(5);
@@ -35,90 +35,89 @@ void playToneShort(int hrtz)
 // Writes out msg in a type writer effect with a 
 // beeping sound to the standard output.
 // Does not beep on spaces
-void TypeMsg(const char *msg)
+void typeMsg(const char *msg)
 {
-	int i = 0;
+	size_t i = 0;
 	while(msg[i])
 	{
 		if(msg[i] != ' ')
 		{
-			playTone(RandRange(1000, 1100));
+			playTone(randRange(1000, 1100));
 		}
-		
+
 		fflush(stdout);
-		printf("%c", msg[i]);
+		putchar(msg[i]);
+		i++;
+	}
+}
+
+// Same as TypeMsg, but with no delay between letters
+void typeMsgFast(const char* msg)
+{
+	size_t i = 0;
+	while(msg[i])
+	{
+		fflush(stdout);
+		playToneShort(randRange(1000, 1100));
+		putchar(msg[i]);
 		i++;
 	}
 }
 
 // Same as TypeMsg, but beeps on spaces
-void TypeWithSpaceSound(const char* msg)
+void typeWithSpaceSound(const char* msg)
 {
-	int i = 0;
+	size_t i = 0;
 	while(msg[i])
 	{
+		playTone(randRange(1000, 1100));
 		fflush(stdout);
-		playTone(RandRange(1000, 1100));
-		printf("%c", msg[i]);
+		putchar(msg[i]);
 		i++;
 	}
 }
 
 // types msg centered on the screen, 
 // hard coded macro for width of IBM screen
-void TypeCenter(const char *msg)
+void typeCenter(const char *msg)
 {
-	int msgLength = strLength(msg);
-	int pos = (int)((CONSOLE_WIDTH - msgLength) / 2);
-	printf("%.*", pos);
-	TypeMsg(msg);
-}
-
-// Same as TypeMsg, but with no delay between letters
-void TypeMsgFast(const char* msg)
-{
-	int i = 0;
-	while(msg[i])
+	size_t padLength = ((CONSOLE_WIDTH - strlen(msg)) / 2);
+	
+	size_t i = 0;
+	for(i = 0; i < padLength; i++)
 	{
-		fflush(stdout);
-		playToneShort(RandRange(1000, 1100));
-		printf("%c", msg[i]);
-		i++;
+		putchar(' ');
 	}
+	
+	typeMsg(msg);
 }
 
-void Print(const char *msg)
+void print(const char *msg)
 {
 	printf("%s", msg);
 }
 
-void Newline()
+void printLine(const char *msg)
 {
-	printf("%s", "\n");
+	printf("%s\n", msg); 
 }
 
-int RandRange(int min, int max)
+void newline()
 {
-	return(rand()%(max - min) + min);
+	putchar('\n');
 }
 
-void ClearScreen()
+int randRange(int min, int max)
+{
+	return(rand() % (max - min) + min);
+}
+
+void clearScreen()
 {
 	system("cls");
 }
 
-int strLength(const char *msg)
-{
-	int i = 0;
-	while(msg[i] != 0)
-    {
-		i++;
-	}
-
-	return i;
-}
-
-void GetLine(char *msg, int length)
+void getLine(char *msg, int length)
 {
 	do
 	{

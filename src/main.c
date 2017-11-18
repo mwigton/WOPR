@@ -21,17 +21,42 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "wopr.h"
 #include "util.h"
+#include "wardial.h"
+#include <stdio.h>
+#include "commandline.h"
 
-int main()
+void dirCmd()
 {
-	SetupUtils();
-	ClearScreen();
+	printLine("wardial");
+	printLine("dial");
+	newline();
+}
+
+void woprCmd()
+{
 	if(LoginWopr())
 	{
 		LoginSuccess();
 		WoprChat();
 		GlobalThermonuclearWar();
 	}	
+}
 
+int main()
+{
+	SetupUtils();
+	clearScreen();
+	
+	Command commands[] = 
+	{
+		{ "dir", &dirCmd },
+		{ "wopr", &woprCmd }
+	};
+	
+	while(1)
+	{
+		commandLine(commands, ARRAY_SIZE(commands));
+	}
+	
 	return 0;
 }
