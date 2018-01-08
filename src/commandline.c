@@ -20,10 +20,11 @@ Command *parseCommand(const char *command, Command *commands, size_t size)
 void commandLine(Command *commands, size_t size)
 {
 	char command[CONSOLE_WIDTH];
+	Command *cmd = NULL;
 	
 	printf("C:\\");
 	getLine(command, CONSOLE_WIDTH);
-	Command *cmd = parseCommand(command, commands, size);
+	cmd = parseCommand(command, commands, size);
 	if(cmd)
 	{
 		(*cmd->action)();

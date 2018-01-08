@@ -19,44 +19,71 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <stdio.h>
+#include "main.h"
 #include "wopr.h"
 #include "util.h"
 #include "wardial.h"
-#include <stdio.h>
 #include "commandline.h"
+
+#include <signal.h>
+
+Command commands[] = 
+{
+        { "dir", FALSE, &dirCmd },
+        { "wopr", TRUE, &woprCmd },
+        { "wardial", TRUE, &wardial }
+};
 
 void dirCmd()
 {
-	printLine("wardial");
-	printLine("dial");
-	newline();
+        int i = 0;
+        for (i = 0; i < ARRAY_SIZE(commands); i++)
+        {
+                if (commands[i].displayList == TRUE)
+                {
+                        printLine(commands[i].name);
+                }
+        }
+
+        newline();
 }
 
 void woprCmd()
 {
-	if(LoginWopr())
-	{
-		LoginSuccess();
-		WoprChat();
-		GlobalThermonuclearWar();
-	}	
+        if(LoginWopr())
+        {
+                LoginSuccess();
+                WoprChat();
+                GlobalThermonuclearWar();
+        }       
+}
+
+void wardial()
+{
+        wardialExecute();
+}
+
+void dummySignalHandler(int value)
+{
+
 }
 
 int main()
 {
-	SetupUtils();
-	clearScreen();
-	
-	Command commands[] = 
-	{
-		{ "dir", &dirCmd },
-		{ "wopr", &woprCmd }
-	};
-	
-	while(1)
-	{
-		commandLine(commands, ARRAY_SIZE(commands));
-	}
-	
-	return 0;
+        signal(SIGINT, dummySignalHandler);
+        signal(SIGTERM, dummySignalHandler);
+        signal(SIGBREAK, dummySignalHandler);
+        signal(SIGABRT, dummySignalHandler);
+        
+        SetupUtils();
+        clearScreen();
+
+        while(1)
+        {
+                commandLine(commands, ARRAY_SIZE(commands));
+        }
+        
+        return 0;
 }
+

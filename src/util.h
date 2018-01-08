@@ -9,6 +9,10 @@
 #define delay(millsec) Sleep(millsec)
 #endif
 
+typedef int BOOL;
+#define FALSE 0
+#define TRUE 1
+
 void SetupUtils();
 
 void playTone(int hrtz);

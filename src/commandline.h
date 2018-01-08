@@ -1,9 +1,12 @@
 #ifndef COMMANDLINE_H
 #define COMMANDLINE_H
 
+#include "util.h"
+
 typedef struct 
 {
 	char *name;
+	BOOL displayList;
 	void (*action)();
 } Command;
 

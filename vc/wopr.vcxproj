@@ -64,12 +64,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\commandline.c" />
     <ClCompile Include="..\src\main.c" />
     <ClCompile Include="..\src\util.c" />
+    <ClCompile Include="..\src\wardial.c" />
     <ClCompile Include="..\src\wopr.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\commandline.h" />
+    <ClInclude Include="..\src\main.h" />
     <ClInclude Include="..\src\util.h" />
+    <ClInclude Include="..\src\wardial.h" />
     <ClInclude Include="..\src\wopr.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

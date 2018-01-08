@@ -4,10 +4,10 @@ projectIdent
 VpeMain
 1
 WRect
-384
-4396
-5232
-5107
+2224
+1043
+3920
+6534
 2
 MProject
 3
@@ -39,5 +39,5 @@ WFileName
 12
 bin/wopr.tgt
 0
-6
+11
 7

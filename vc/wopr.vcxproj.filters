@@ -24,12 +24,27 @@
     <ClCompile Include="..\src\wopr.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\commandline.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\wardial.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\util.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\wopr.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\commandline.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\wardial.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\main.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
