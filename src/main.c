@@ -28,62 +28,68 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <signal.h>
 
-Command commands[] = 
+Command commands[] =
 {
-        { "dir", FALSE, &dirCmd },
-        { "wopr", TRUE, &woprCmd },
-        { "wardial", TRUE, &wardial }
+	{ "dir", FALSE, &dirCmd },
+	{ "wopr", TRUE, &woprCmd },
+	{ "wardial", TRUE, &wardial }
 };
 
 void dirCmd()
 {
-        int i = 0;
-        for (i = 0; i < ARRAY_SIZE(commands); i++)
-        {
-                if (commands[i].displayList == TRUE)
-                {
-                        printLine(commands[i].name);
-                }
-        }
+	int i = 0;
+	for (i = 0; i < ARRAY_SIZE(commands); i++)
+	{
+		if (commands[i].displayList == TRUE)
+		{
+			printLine(commands[i].name);
+		}
+	}
 
-        newline();
+	newline();
 }
 
 void woprCmd()
 {
-        if(LoginWopr())
-        {
-                LoginSuccess();
-                WoprChat();
-                GlobalThermonuclearWar();
-        }       
+	clearScreen();
+	if (LoginWopr())
+	{
+		LoginSuccess();
+		WoprChat();
+		GlobalThermonuclearWar();
+	}
 }
 
 void wardial()
 {
-        wardialExecute();
+	clearScreen();
+	wardialExecute();
 }
 
 void dummySignalHandler(int value)
 {
+	registerSignals();
+}
 
+void registerSignals()
+{
+	signal(SIGINT, dummySignalHandler);
+	signal(SIGTERM, dummySignalHandler);
+	signal(SIGBREAK, dummySignalHandler);
+	signal(SIGABRT, dummySignalHandler);
 }
 
 int main()
 {
-        signal(SIGINT, dummySignalHandler);
-        signal(SIGTERM, dummySignalHandler);
-        signal(SIGBREAK, dummySignalHandler);
-        signal(SIGABRT, dummySignalHandler);
-        
-        SetupUtils();
-        clearScreen();
+	registerSignals();
+	SetupUtils();
+	clearScreen();
 
-        while(1)
-        {
-                commandLine(commands, ARRAY_SIZE(commands));
-        }
-        
-        return 0;
+	while (1)
+	{
+		commandLine(commands, ARRAY_SIZE(commands));
+	}
+
+	return 0;
 }
 
